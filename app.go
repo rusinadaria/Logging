@@ -8,9 +8,9 @@ import (
 	// "github.com/golang-jwt/jwt/v5"
 	"github.com/go-chi/chi/v5"
 	_ "github.com/lib/pq"
-
 	// "log"
 	"time"
+	"github.com/rusinadaria/Logging/pkg/service"
 )
 
 // func appServerRun() {
@@ -33,7 +33,7 @@ func handleGetGuidAndIP(w http.ResponseWriter, r *http.Request){
 
 	//вызвать генерацию токенов
 	// tokenService.generateTokens(guid, ip)
-	accessToken, refreshToken := generateTokens(ip)
+	accessToken, refreshToken := service.GenerateTokens(ip)
 	// _, refreshToken := generateTokens(ip)
 
 
@@ -51,7 +51,7 @@ func handleGetGuidAndIP(w http.ResponseWriter, r *http.Request){
 	// // Сохранение изменений
 	// err := session.Save(r, w)
 
-	saveToken(refreshToken, guid)
+	// service.saveToken(refreshToken, guid)
 }
 
 func getGuid(r *http.Request) int {

@@ -1,4 +1,4 @@
-package main
+package service
 
 import (
 	_"github.com/lib/pq"
@@ -18,7 +18,7 @@ import (
 // 	refreshToken string
 // }
 
-func generateTokens(ip string) (string, string) {
+func GenerateTokens(ip string) (string, string) {
 	accessToken, err := generateAccessToken(ip)
 	if err != nil {
 		fmt.Println("tokenService error")
@@ -53,7 +53,7 @@ func generateRefreshToken (ip string) (string, error) {
 }
 
 func saveToken(refreshToken string, guid int) {
-	SaveRefreshToken(guid, refreshToken)
+	repository.SaveRefreshToken(guid, refreshToken)
 }
 
 func validTokens () { // для второго маршрута

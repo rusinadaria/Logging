@@ -2,24 +2,18 @@ package main
 
 import (
 	"fmt"
-	"net/http"
-	"github.com/go-chi/chi/v5"
 	"log/slog"
+	"net/http"
 	"os"
+
+	"github.com/go-chi/chi/v5"
 	"github.com/joho/godotenv"
+	"github.com/rusinadaria/Logging/repository"
 )
 
 func handlerHome(w http.ResponseWriter, r *http.Request) {
 	fmt.Fprintf(w, "HOME ROUT")
 }
-
-// func handlerGuid(w http.ResponseWriter, r *http.Request) {
-// 	fmt.Fprintf(w, "GET GUID ROUT")
-// }
-
-// func handlerRefresh(w http.ResponseWriter, r *http.Request) {
-// 	fmt.Fprintf(w, "REFRESH ROUT")
-// }
 
 func main() {
 	godotenv.Load()
@@ -35,7 +29,7 @@ func main() {
 	logger := slog.New(slog.NewJSONHandler(f, opts))
 	logger.Info("Info message")
 
-	ConnectDatabase(logger)
+	repository.ConnectDatabase(logger)
 
 	router := chi.NewRouter()
     router.HandleFunc("/", handlerHome)
